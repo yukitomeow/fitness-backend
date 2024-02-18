@@ -1,3 +1,8 @@
-from django.test import TestCase
+from rest_framework import serializers
+from .models import Profile
 
-# Create your tests here.
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['uuid', 'email', 'user']
+        depth = 1 # This will include the user object details
