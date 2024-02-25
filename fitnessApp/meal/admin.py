@@ -6,6 +6,14 @@ class MealAdminSettings(admin.ModelAdmin):
 
 class FoodItemAdminSettings(admin.ModelAdmin):
     list_display = ('pk', 'meal','name', 'nutrition')
+    # actions = ['custom_task']
+    # def custom_task(self, request, queryset):
+    #     for food_item in queryset:
+    #         print(food_item.name)
+    #     self.message_user(request, f"Finished doing custom task on food items")
+    # custom_task.short_description = "Do custom task"
+   
+
 
 class NutritionAdminSettings(admin.ModelAdmin):
     list_display = ('calories', 'protein','carbohydrates', 'fats')
