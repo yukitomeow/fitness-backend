@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'allauth.account.middleware.AccountMiddleware'
+    'allauth.account.middleware.AccountMiddleware',
 ]
 SITE_ID = 1
 ROOT_URLCONF = 'fitnessApp.urls'
@@ -187,13 +187,29 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_LOGOUT_ON_GET = False
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+
+
+
+# Allauth settings
+# https://django-allauth.readthedocs.io/en/latest/configuration.html
+
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 # https://www.django-rest-framework.org/api-guide/authentication/#setting-the-authentication-scheme
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication', # required for token authentication, must provide token in header
-        #'dj_rest_auth.jwt_auth.JWTCookieAuthentication', # switch to this    ]
     ]
 }
-
