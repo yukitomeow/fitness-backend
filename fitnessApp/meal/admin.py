@@ -1,11 +1,14 @@
 from django.contrib import admin
 from .models import Meal, FoodItem, Nutrition
 
+class FoodItemInline(admin.TabularInline):
+    model = Meal.foods.through
+    extra = 1
 class MealAdminSettings(admin.ModelAdmin):
     list_display = ('pk', 'user','meal_type', 'created_at', 'hungry_when_eating', 'stop_eating_not_hungry')
-
+    # inlines = (FoodItemInline,)
 class FoodItemAdminSettings(admin.ModelAdmin):
-    list_display = ('pk', 'meal','name', 'nutrition')
+    list_display = ('pk', 'name', 'nutrition')
     # actions = ['custom_task']
     # def custom_task(self, request, queryset):
     #     for food_item in queryset:
@@ -22,3 +25,8 @@ class NutritionAdminSettings(admin.ModelAdmin):
 admin.site.register(Meal, MealAdminSettings)
 admin.site.register(FoodItem, FoodItemAdminSettings)
 admin.site.register(Nutrition, NutritionAdminSettings)
+
+
+
+# class MealAdmin(admin.ModelAdminSettings):
+    
